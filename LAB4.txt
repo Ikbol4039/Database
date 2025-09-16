@@ -1,0 +1,99 @@
+Microsoft Windows [Version 10.0.26100.6584]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\PostgreSQL\17\pgAdmin 4\runtime>"C:\Program Files\PostgreSQL\17\pgAdmin 4\runtime\psql.exe"
+ "host=localhost port=5432 dbname=lab4 user=postgres sslmode=prefer connect_timeout=10" 2>>&1
+psql (17.5)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+lab4=# SELECT * FROM students;
+ student_id |  name   |  email   | faculty
+------------+---------+----------+---------
+          1 | ikbol   | kjsnskn@ | SFW
+          2 | Alrynai | sa12341@ | ECO
+          3 | Sultan  | ss43423@ | SFW
+(3 rows)
+
+
+lab4=# SELECT name, email FROM students WHERE faculty = 'SFW';
+  name  |  email
+--------+----------
+ ikbol  | kjsnskn@
+ Sultan | ss43423@
+(2 rows)
+
+
+lab4=# SELECT name, email FROM students;
+  name   |  email
+---------+----------
+ ikbol   | kjsnskn@
+ Alrynai | sa12341@
+ Sultan  | ss43423@
+(3 rows)
+
+
+lab4=#
+lab4=# SELECT * FROM students;
+ student_id |  name   |  email   | faculty
+------------+---------+----------+---------
+          1 | ikbol   | kjsnskn@ | SFW
+          2 | Alrynai | sa12341@ | ECO
+          3 | Sultan  | ss43423@ | SFW
+(3 rows)
+
+
+lab4=#
+lab4=# SELECT student_id, faculty FROM students;
+ student_id | faculty
+------------+---------
+          1 | SFW
+          2 | ECO
+          3 | SFW
+(3 rows)
+
+
+lab4=#
+lab4=# SELECT name, email FROM students WHERE name = 'Ikbol';
+ name | email
+------+-------
+(0 rows)
+
+
+lab4=# SELECT name, email FROM students WHERE name = 'ikbol';
+ name  |  email
+-------+----------
+ ikbol | kjsnskn@
+(1 row)
+
+
+lab4=# SELECT name, email FROM students ORDER BY;
+ERROR:  syntax error at or near ";"
+LINE 1: SELECT name, email FROM students ORDER BY;
+                                                 ^
+lab4=#
+lab4=# SELECT name, email, faculty FROM students ORDER BY;
+ERROR:  syntax error at or near ";"
+LINE 1: SELECT name, email, faculty FROM students ORDER BY;
+                                                          ^
+lab4=#
+lab4=# SELECT name, email, faculty FROM students ORDER BY name;
+  name   |  email   | faculty
+---------+----------+---------
+ Alrynai | sa12341@ | ECO
+ ikbol   | kjsnskn@ | SFW
+ Sultan  | ss43423@ | SFW
+(3 rows)
+
+
+lab4=# SELECT name, email FROM students LIMIT 2;
+  name   |  email
+---------+----------
+ ikbol   | kjsnskn@
+ Alrynai | sa12341@
+(2 rows)
+
+
+lab4=#
