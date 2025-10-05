@@ -1,0 +1,25 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Ikbol Allakhunov> psql -U potgres
+Password for user potgres:
+
+psql: error: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+PS C:\Users\Ikbol Allakhunov> psql -U postgres
+Password for user postgres:
+
+psql (17.5)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE DATABASE Ikbol;
+CREATE DATABASE
+postgres=# DROP DATABASE Ikbol;
+DROP DATABASE
+postgres=# \c Lab3
+You are now connected to database "Lab3" as user "postgres".
+Lab3=#
