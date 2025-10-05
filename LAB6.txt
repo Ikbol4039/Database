@@ -1,0 +1,49 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Ikbol Allakhunov> psql -U postgres -d simple_library
+Password for user postgres:
+
+psql (17.5)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+simple_library=# CREATE TABLE students (
+simple_library(#     student_id SERIAL PRIMARY KEY,
+simple_library(#     first_name VARCHAR(50) NOT NULL,
+simple_library(#     last_name VARCHAR(50) NOT NULL,
+simple_library(#     email VARCHAR(100) UNIQUE NOT NULL,
+simple_library(#     faculty VARCHAR(100)
+simple_library(# );
+CREATE TABLE
+simple_library=# DROP TABLE test_table;
+ERROR:  table "test_table" does not exist
+simple_library=# DROP TABLE IF EXISTS test_table;
+NOTICE:  table "test_table" does not exist, skipping
+DROP TABLE
+simple_library=# ALTER TABLE students
+simple_library-# ADD COLUMN date_of_birth DATE;
+ALTER TABLE
+simple_library=# ALTER TABLE students
+simple_library-# DROP COLUMN faculty;
+ALTER TABLE
+simple_library=# ALTER TABLE students
+simple_library-# ADD CONSTRAINT unique_student_email UNIQUE (email);
+ALTER TABLE
+simple_library=# ALTER TABLE students
+simple_library-# RENAME COLUMN email TO email_address;
+ALTER TABLE
+simple_library=# ALTER TABLE students
+simple_library-# RENAME TO university_students;
+ALTER TABLE
+simple_library=# SELECT * FROM university_students;
+ student_id | first_name | last_name | email_address | date_of_birth
+------------+------------+-----------+---------------+---------------
+(0 rows)
+
+
+simple_library=#
