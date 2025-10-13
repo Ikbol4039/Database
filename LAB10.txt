@@ -1,0 +1,57 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Ikbol Allakhunov> psql -U postgres
+Password for user postgres:
+
+psql (17.5)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \dt
+              List of relations
+ Schema |      Name       | Type  |  Owner
+--------+-----------------+-------+----------
+ public | courses         | table | postgres
+ public | enrollments     | table | postgres
+ public | enrollments_bad | table | postgres
+ public | students        | table | postgres
+ public | students_bad    | table | postgres
+ public | students_phones | table | postgres
+ public | teachers        | table | postgres
+(7 rows)
+
+
+postgres=# \d
+                   List of relations
+ Schema |          Name           |   Type   |  Owner
+--------+-------------------------+----------+----------
+ public | courses                 | table    | postgres
+ public | enrollments             | table    | postgres
+ public | enrollments_bad         | table    | postgres
+ public | students                | table    | postgres
+ public | students_bad            | table    | postgres
+ public | students_phones         | table    | postgres
+ public | teachers                | table    | postgres
+ public | teachers_teacher_id_seq | sequence | postgres
+(8 rows)
+
+
+postgres=# \d courses
+                        Table "public.courses"
+   Column    |          Type          | Collation | Nullable | Default
+-------------+------------------------+-----------+----------+---------
+ course_id   | integer                |           | not null |
+ course_name | character varying(100) |           |          |
+ credits     | integer                |           |          |
+Indexes:
+    "courses_pkey" PRIMARY KEY, btree (course_id)
+Referenced by:
+    TABLE "enrollments" CONSTRAINT "enrollments_course_id_fkey" FOREIGN KEY (course_id) REFERENCES courses(course_id)
+
+
+postgres=#
