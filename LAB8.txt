@@ -1,0 +1,89 @@
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE TABLE Faculties (
+postgres(# faculty_id SERIAL PRIMARY KEY,
+postgres(# faculty_name VARCHAR(100) NOT NULL
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE Students (
+postgres(# student_id SERIAL PRIMARY KEY,
+postgres(# full_name VARCHAR(100) NOT NULL,
+postgres(# faculty_id INT,
+postgres(# CONSTRAINT fk_students_faculty FOREIGN KEY (faculty_id)
+postgres(# REFERENCES Faculties(faculty_id)
+postgres(# ON DELETE SET NULL
+postgres(# ON UPDATE CASCADE
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE Departments (
+postgres(# dept_id SERIAL PRIMARY KEY,
+postgres(# dept_name VARCHAR(100) NOT NULL,
+postgres(# faculty_id INT NOT NULL,
+postgres(# CONSTRAINT fk_departments_faculty FOREIGN KEY (faculty_id)
+postgres(# REFERENCES Faculties(faculty_id)
+postgres(# ON DELETE RESTRICT
+postgres(# ON UPDATE CASCADE
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE Courses (
+postgres(# course_id SERIAL PRIMARY KEY,
+postgres(# course_name VARCHAR(100) NOT NULL,
+postgres(# faculty_id INT DEFAULT 1,
+postgres(# CONSTRAINT fk_courses_faculty FOREIGN KEY (faculty_id)
+postgres(# REFERENCES Faculties(faculty_id)
+postgres(# ON DELETE SET DEFAULT
+postgres(# ON UPDATE CASCADE
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE Enrollments (
+postgres(# enrollment_id SERIAL PRIMARY KEY,
+postgres(# student_id INT NOT NULL,
+postgres(# course_id INT NOT NULL,
+postgres(# CONSTRAINT fk_enroll_student FOREIGN KEY (student_id)
+postgres(# REFERENCES Students(student_id)
+postgres(# ON DELETE CASCADE
+postgres(# ON UPDATE CASCADE,
+postgres(# CONSTRAINT fk_enroll_course FOREIGN KEY (course_id)
+postgres(# REFERENCES Courses(course_id)
+postgres(# ON DELETE CASCADE
+postgres(# ON UPDATE CASCADE
+postgres(# );
+CREATE TABLE
+postgres=# INSERT INTO Faculties (faculty_name) VALUES
+postgres-# ('Информатика'),   
+postgres-# ('Математика'),    
+postgres-# ('Физика');        
+INSERT 0 3
+postgres=#
+postgres=# INSERT INTO Students (full_name, faculty_id) VALUES
+postgres-# ('Иванов Иван', 1),   
+postgres-# ('Петров Петр', 2),  
+postgres-# ('Сидорова Анна', 1); 
+INSERT 0 3
+postgres=#
+postgres=# INSERT INTO Departments (dept_name, faculty_id) VALUES
+postgres-# ('Кафедра баз данных', 1),  
+postgres-# ('Кафедра анализа', 2);     
+INSERT 0 2
+postgres=#
+postgres=# INSERT INTO Courses (course_name, faculty_id) VALUES
+postgres-# ('Базы данных', 1),            
+postgres-# ('Математический анализ', 2); 
+INSERT 0 2
+postgres=#
+postgres=# INSERT INTO Enrollments (student_id, course_id) VALUES
+postgres-# (1, 1),
+postgres-# (2, 2),
+postgres-# (3, 1);
+INSERT 0 3
+postgres=# DELETE FROM Faculties WHERE faculty_id = 2;
+ERROR:  update or delete on table "faculties" violates foreign key constraint "fk_departments_faculty" on table "departments"
+DETAIL:  Key (faculty_id)=(2) is still referenced from table "departments".
+postgres=# DELETE FROM Departments WHERE faculty_id = 2;
+DELETE 1
+postgres=# DELETE FROM Faculties WHERE faculty_id = 2;
+DELETE 1
+postgres=#
