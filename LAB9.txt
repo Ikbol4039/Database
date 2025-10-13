@@ -1,0 +1,75 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Ikbol Allakhunov> psql -U postgres
+Password for user postgres:
+
+psql (17.5)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE TABLE students_bad(
+postgres(# student_id INT PRIMARY KEY,
+postgres(# name VARCHAR(100),
+postgres(# phone_number TEXT
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE students(
+postgres(# student_id INT PRIMARY KEY,
+postgres(# name VARCHAR(100),
+postgres(# );
+ERROR:  syntax error at or near ")"
+LINE 4: );
+        ^
+postgres=# CREATE TABLE students(
+postgres(# student_id INT PRIMARY KEY,
+postgres(# name VARCHAR(100)
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE students_phones(
+postgres(# student_id INT,
+postgres(# phone_number VARCHAR(15),
+postgres(# phone_type VARCHAR(20),
+postgres(# PRIMARY KEY (student_id, phone_number),
+postgres(# FOREIGN KEY (student_id) REFERENCES students(student_id)
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE enrollments_bad(
+postgres(# student_id INT,
+postgres(# course_id INT,
+postgres(# course_name VARCHAR(100),
+postgres(# grade CHAR(2),
+postgres(# PRIMARY KEY (student_id, course_id)
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE courses(
+postgres(# course_id INT PRIMARY KEY,
+postgres(# course_name VARCHAR(100),
+postgres(# credits INT
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE enrollments(
+postgres(# student_id INT,
+postgres(# course_id INT,
+postgres(# grade CHAR(2),
+postgres(# PRIMARY KEY (student_id, course_id),
+postgres(# FOREIGN KEY (student_id) REFERENCES students(student_id),
+postgres(# FOREIGN KEY (course_id) REFERENCES courses(course_id)
+postgres(# );
+CREATE TABLE
+postgres=# \dt
+              List of relations
+ Schema |      Name       | Type  |  Owner
+--------+-----------------+-------+----------
+ public | courses         | table | postgres
+ public | enrollments     | table | postgres
+ public | enrollments_bad | table | postgres
+ public | students        | table | postgres
+ public | students_bad    | table | postgres
+ public | students_phones | table | postgres
+ public | teachers        | table | postgres
+(7 rows)
